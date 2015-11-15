@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <style type="text/css">
+
+        #nav > ul {
+            margin: 0;
+            position: relative;
+            left锛?00px;
+        }
+
+        #nav > ul > li {
+            display: inline-block;
+            font-style: italic;
+            margin: 0 0.35em 0 0.35em;
+        }
+
+        #nav > ul > li > a {
+            border-radius: 5px;
+            color: #5d5d5d;
+            text-decoration: none;
+            padding: .6em 1.2em 0.6em 1.2em;0
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+            outline: 0;
+        }
+
+        #nav > ul > li:hover > a, #nav > ul > li.active > a {
+            background: #f3f3f3;
+        }
+
+        #nav > ul > li.current > a {
+            background: #d52349;
+            color: #fff !important;
+            font-weight: 700;
+        }
+        #nav>form{
+            position: relative;
+            left:75%;
+            top:-40px;
+            font-weight: 300;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffff99;
+            font-weight: 700;
+        }
+
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+            color: yellow;
+            text-decoration: none;
+        }
+
+        a {
+            color: #d52349;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        div#header {background-color:#99bbbb;clear:both;text-align:center;}
+        div#sidemenu {background-color: transparent;height:1000px;width:20% ;float:left;}
+        div#sidemenu>div{
+            width: 50px;
+            height: 50px;
+            margin:80px;
+            position: relative;
+            left:10%;
+
+
+            border-radius: 50%;
+            background-color: navajowhite;
+            color: #b3d4fc;;
+            padding: 1.2em 1.2em 1.2em 1.2em;
+        }
+        div#content {background-color:#EEEEEE;height:1000px;width:60%;float:left;}
+        div#content>div>form>input{
+            position: relative;
+            left:90%;
+            top:11px;
+        }
+        div#content>div>form>textarea{
+            position: relative;
+            top:20px;
+            resize: none;
+            width: 99%;
+            height: 150px;
+            max-width: 100%;
+            max-height: 150px;
+
+        }
+        div#footer {background-color:#99bbbb;clear:both;text-align:center;}
+        div#passage{
+            background-color: #2daae4;
+            height:1000px;width:100%;
+        }
+        div#passage>a{
+            border-radius: 10px;
+            background-color: #3b5671;
+        }
+        div#passage>div{
+            width: 100%;
+            border-radius: 10px;
+            background-color: #CCE8F4;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+
+    <div id="header">
+        <h1>Travelink</h1>
+    </div id = "header">
+    <nav id="nav">
+        <ul>
+            <li class="current"><a href="index.html">我的主页</a></li>
+            <li><a href="#">文章</a></li>
+            <li><a href="#">Left Sidebar</a></li>
+            <li><a href="#">Right Sidebar</a></li>
+            <li><a href="#">No Sidebar</a></li>
+        </ul>
+        <form  action="" method="get" >
+ 		
+            <p>用户名：<input type="text" placeholder="用户名" name="username"/></p>
+            <p>密码:<input type="text" placeholder="密码" name="password"/></p>
+            <input type="submit" value="login" />
+        </form>
+    </nav>
+    <div id="sidemenu">
+
+            <div>
+                <a>游记</a>
+            </div>
+            <div>
+               <a>去旅游</a>
+            </div>
+            <div>
+                <a>更多</a>
+            </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <form action="" method="get" color = "blue">
+                <p>题目<input type="text" name = "yj_title"/></p>
+                <textarea  name="yj" cols="86" rows="10">
+                </textarea>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id = "passage">
+            {%for passage in blog_list%}
+                <p>《{{passage.Title}}》</p>
+                <div >
+                    {{passage.Passage}}
+                </div>
+                <a>
+                    #{{passage.Tag}}
+                </a>
+            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=2)" width="100%" color=#987cb9 SIZE=8>
+            {%endfor%}
+        </div>
+    <div id="sidemenu">
+
+
+    </div>
+    <div id="footer">Copyright k&a</div>
+
+</div>
+
+
+</body>
+</html>
