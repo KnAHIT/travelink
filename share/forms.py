@@ -28,3 +28,8 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = "__all__"
     password = forms.CharField(label='password',widget=forms.PasswordInput())
+
+class PlanForm(forms.ModelForm):
+    class Meta:
+        model = Travel_plan
+        fields = "__all__"
