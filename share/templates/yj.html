@@ -2,10 +2,16 @@
 <html lang="zh-ch">
 <head>
     <meta charset="utf-8">
-    <style type="text/css">
-        h1, h2, h3, h4, h5, h6,a,li {
-            color: #ffff99;
-            font-weight: 700;
+    < <style type="text/css">
+        p{
+            font-family: monospace, monospace;
+        }
+        input{
+            border-radius: 5px;
+        }
+        h2, h3, h4, h5, h6,a,li {
+            color:black;
+            font-weight: 700；
             font-family: monospace, monospace;
         }
 
@@ -14,7 +20,11 @@
             text-decoration: none;
             font-family: monospace, monospace;
         }
-
+        #header>h1 {
+            font-size: 30px;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,.2);
+        }
         a {
             color: #d52349;
             text-decoration: none;
@@ -24,13 +34,76 @@
             text-decoration: underline;
         }
         div#header {background-color:red;clear:both;text-align:center;}
-        div#footer {background-color:red;clear:both;text-align:center;}
-        nav>button{
+        div#footer {background-color:red;clear:both;text-align:center;};}
+        div#header>button{
             position: relative;
-            left: 90%;
+            left: 30%;
+        }
+        textarea#passage{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            position: relative;
+            resize: none;
+            width: 60%;
+            height: 750px;
+            max-width: 600%;
+            max-height: 750px;
+            overflow-y: visible;
+            overflow-y: scroll;
+            border-radius: 7px;
+        }
+        textarea#tags{
+
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            position: relative;
+            resize: none;
+            width: 60%;
+            height: 50px;
+            max-width: 600%;
+            max-height: 150px;
+            overflow-y: visible;
+            overflow-y: scroll;
+            border-radius: 7px;
         }
 
-        </style>
+        input#title{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            width: 60%;
+        }
+        button{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+
+        }
+        input#publish_note{
+            background-color: peru ;
+            border-radius: 7px;
+
+        }
+        input#cancel_note{
+            background-color: peru ;
+            border-radius: 7px;
+            position: relative;
+            left:70%;
+        }
+        div{
+            margin: 30px 0 0 0;
+        }
+    </style>
+
 
 </head>
 <body>
@@ -189,32 +262,46 @@
     <div id="container">
 
         <form  enctype="multipart/form-data" class="city_title" action="" method="post" onsubmit="manSub(this);return false;" name="spc" >
-            {% for field in diary_form %}
-            <p>{{ field.label_tag }}</p>
-            <p>{{ field }} </p>
-            <p>{{ field.errors }}</p>
-            {% endfor %}
-            <div class="row note-privacy">
-                <label style="font-size: 10px" >set permission</label>
-                <label style="font-size: 10px">
-                    <input tabindex="4" name="note_privacy" type="radio" value="P" checked /><span>everyone can see</span>
+            <h2>新加游记</h2>
+            <h4>题目:</h4>
+            <input type="text" name ="Title" id ="title">
+            <h4>正文：</h4>
+            <textarea type="text" name = "Passage" id="passage">
+
+            </textarea>
+            <h4>标签：</h4>
+            <textarea type="text" name = "Tag" id="tags">
+
+            </textarea>
+            <h5>图片：<input type="file" class="" name="Image"> </h5>
+
+
+            <div>
+                <h5>地点:
+                <select  name="ddlProvince" id="ddlProvince" onchange="selectMoreCity(this)"></select>
+                <select name="ddlCity" id="ddlCity">
+                    <option selected value="">城市</option>
+                </select>
+                </h5>
+            </div>
+            <div class="note-privacy">
+                <label style="font-size: 13px" >权限设置</label>
+                <label style="font-size: 15px">
+                    <input tabindex="4" name="note_privacy" type="radio" value="P" checked /><span>所有人可见</span>
                 </label>
-                <label style="font-size: 10px">
-                    <input tabindex="5" name="note_privacy" type="radio" value="S"  /><span>only my friends</span>
+                <label style="font-size: 15px">
+                    <input tabindex="5" name="note_privacy" type="radio" value="S"  /><span>只有好友</span>
                 </label>
-                <label style="font-size: 10px">
-                    <input tabindex="6" name="note_privacy" type="radio" value="X"  /><span>only me</span>
+                <label style="font-size: 15px">
+                    <input tabindex="6" name="note_privacy" type="radio" value="X"  /><span>只有我</span>
                 </label>
             </div>
+            <div>
+                <input tabindex="10" id="publish_note" value="Submit" type="submit"  name="note_submit" />
 
-            <select  name="ddlProvince" id="ddlProvince" onchange="selectMoreCity(this)"></select>
-            <select name="ddlCity" id="ddlCity">
-                <option selected value="">城市</option>
-            </select>
-             
-             <input tabindex="10" id="publish_note" value="Submit" type="submit"  name="note_submit" />
+               <a href="../../"><h6>返回</h6></a>
+            </div>
 
-            <input tabindex="11" id="cancel_note" value="Cancel" type="submit"  name="cancel_note" />
         </form>
 
        

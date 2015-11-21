@@ -21,7 +21,7 @@ class TravelPlanForm(forms.ModelForm):
 class DiaryForm(forms.ModelForm):
     class Meta:
         model = Diary
-        fields = ['Username','Title','Passage','Tag','Image']
+        fields = ['Title','Passage','Tag','Image']
         
 class AccountForm(forms.ModelForm):
     class Meta:
