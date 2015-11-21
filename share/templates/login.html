@@ -32,7 +32,13 @@ body {
 .page-container {
     margin: 120px auto 0 auto;
 }
-
+p{
+    color: green;
+    font-size: 10px;
+}
+a{
+    color: black;
+}
 h1 {
     font-size: 30px;
     font-weight: 700;
@@ -212,8 +218,9 @@ button:active {
     <form action="" method="post">
         <input type="text" name="username" class="username" placeholder="Username">
         <input type="password" name="password" class="password" placeholder="Password">
+
         <button type="submit">Sign me in</button>
-        <div class="error"><span>+</span></div>
+        <p>还没有帐号，注册一个吧<a href="../../register_view.html">sign up</a></p>
     </form>
 </div>
 

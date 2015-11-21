@@ -1,6 +1,6 @@
 #coding=utf-8 
 from django.shortcuts import render,render_to_response
-from share.models import Account,Blog
+from share.models import Account,Blog,Diary
 from django.contrib import auth
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
@@ -86,16 +86,21 @@ def diary(request):
         if diary_form.is_valid():
             province = request.POST['ddlProvince']
             city = request.POST['ddlCity']
-            diary_form.Destination = province+city           
-            diary_form.save()
+            new_diary = Diary()
+            new_diary.Username = diary_form.cleaned_data['Username']
+            new_diary.Title = diary_form.cleaned_data['Title']
+            new_diary.Passage = diary_form.cleaned_data['Passage']
+            new_diary.Tag = diary_form.cleaned_data['Tag']
+            new_diary.Image = diary_form.cleaned_data['Image']
+            new_diary.Destination = province+city
+            new_diary.save()        
+            
             
             return HttpResponse('diary post success')
     else:
         diary_form = DiaryForm()
-    return render_to_response('yj.html',locals())    
-    
-    
-    
+    return render_to_response('yj.html',locals())   
+ 
     
     
     

@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kna',
         'USER': 'root',
-        'PASSWORD': 'kevin',
+        'PASSWORD': '8228',
         'HOST': '',
         'PORT': '3306',
     }
@@ -105,7 +105,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-FILE_CHARSET = 'gb18030'
+FILE_CHARSET = 'utf-8'
 DEFAULT_CHARSET = 'utf-8'
 
 # Static files (CSS, JavaScript, Images)
