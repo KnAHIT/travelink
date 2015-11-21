@@ -16,7 +16,7 @@ Including another URLconf
 #coding=utf-8 
 from django.conf.urls import include, url
 from django.contrib import admin
-from share.views import home,test_blog,login_view,go_out,diary,register_view
+from share.views import home,test_blog,login_view,go_out,diary,register_view,suggest_blog
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^go_out.html/',go_out),
     url(r'^yj.html/',diary),
     url(r'^register/',register_view),
+    url(r'^suggest/',suggest_blog),
+    
     
 ]
 

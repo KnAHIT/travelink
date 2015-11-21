@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
 from share.forms import BlogForm,DiaryForm,AccountForm,PlanForm
+from django.db.models import Q
 # Create your views here.
 
 def home(request):
@@ -132,7 +133,27 @@ def diary(request):
     return render_to_response('yj.html',locals())    
     
     
-    
+def suggest_blog(request):
+    if request.user is not None and request.user.is_active:
+        user_now = request.user.username 
+        account = Account.objects.get(Username=user_now)
+        plan = Travel_plan.objects.get(Username = account)
+        
+        destination_province = plan.Destination.split()[0] 
+        destination_city = plan.Destination.split()[1]       
+        diary_city_list = Diary.objects.filter(
+                                            Q(Destination__icontains=destination_city)|
+                                            Q(Tag__icontains=destination_city) 
+                                            )
+        diary_province_list = Diary.objects.filter(
+                                            Q(Destination__icontains=destination_province)|
+                                            Q(Tag__icontains=destination_province) 
+                                            )
+                
+        
+    else:
+        return HttpResponse('please login first')
+    return render_to_response('testsuggest.html',locals())
     
     
     
