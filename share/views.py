@@ -80,7 +80,7 @@ def test_blog(request):
     return render_to_response('testblog.html',locals())
     
 def go_out(request):
-    
+   
     return render_to_response('go_out.html',locals())
     
 def diary(request):
@@ -88,19 +88,23 @@ def diary(request):
     if request.method == 'POST':
         diary_form = DiaryForm(request.POST,request.FILES)
         if diary_form.is_valid():
-            province = request.POST['ddlProvince']
-            city = request.POST['ddlCity']
-            new_diary = Diary()
-            new_diary.Username = diary_form.cleaned_data['Username']
-            new_diary.Title = diary_form.cleaned_data['Title']
-            new_diary.Passage = diary_form.cleaned_data['Passage']
-            new_diary.Tag = diary_form.cleaned_data['Tag']
-            new_diary.Image = diary_form.cleaned_data['Image']
-            new_diary.Destination = province+city
-            new_diary.save()        
-            
-            
-            return HttpResponse('diary post success')
+            if request.user is not None and request.user.is_active:
+                user_now = request.user.username     
+                
+                province = request.POST['ddlProvince']
+                city = request.POST['ddlCity']
+
+                new_diary = Diary()
+                new_diary.Username = Account.objects.get(Username=user_now)
+                new_diary.Title = diary_form.cleaned_data['Title']
+                new_diary.Passage = diary_form.cleaned_data['Passage']
+                new_diary.Tag = diary_form.cleaned_data['Tag']
+                new_diary.Image = diary_form.cleaned_data['Image']
+                new_diary.Destination = province+' '+city
+                new_diary.save()        
+                
+                
+                return HttpResponse('diary post success')
     else:
         diary_form = DiaryForm()
     return render_to_response('yj.html',locals())    
