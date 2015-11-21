@@ -1,10 +1,10 @@
 #coding=utf-8 
 from django.shortcuts import render,render_to_response
-from share.models import Account,Blog,Diary
+from share.models import Account,Blog,Diary,Travel_plan
 from django.contrib import auth
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
-from share.forms import BlogForm,DiaryForm,AccountForm
+from share.forms import BlogForm,DiaryForm,AccountForm,PlanForm
 # Create your views here.
 
 def home(request):
@@ -56,12 +56,9 @@ def register_view(request):
             new_account.Email = account_form.cleaned_data['Email']
             new_account.Image = account_form.cleaned_data['Image']
             new_account.save()
-            new_user = User()
-            new_user.username = new_account.Username
-            new_user.password = account_form.cleaned_data['password']
-            new_user.email = new_account.Email
-            new_user.save()
-            return HttpResponse('register success')        
+            
+            User.objects.create_user(new_account.Username, new_account.Email, account_form.cleaned_data['password'])
+            return HttpResponseRedirect("/login/")        
     else:
         account_form = AccountForm()
     return render_to_response('register.html',locals())
@@ -80,33 +77,58 @@ def test_blog(request):
     return render_to_response('testblog.html',locals())
     
 def go_out(request):
-   
-    return render_to_response('go_out.html',locals())
+    if  request.user is not None and request.user.is_active:
+        user_now = request.user.username
+        if request.method == 'POST':
+            plan_form = PlanForm(request.POST)
+            if plan_form.is_valid():
+                new_plan = Travel_plan()
+                
+                new_plan.Username = Account.objects.get(Username=user_now)
+                new_plan.Destination = plan_form.cleaned_data['Destination']
+                new_plan.Start_place = plan_form.cleaned_data['Start_place']
+                new_plan.Start_date = plan_form.cleaned_data['Start_date']
+                new_plan.End_date = plan_form.cleaned_data['End_date']
+                new_plan.People_amount = plan_form.cleaned_data['People_amount']
+                new_plan.Budget = plan_form.cleaned_data['Budget']
+                new_plan.Demand = plan_form.cleaned_data['Demand']
+                new_plan.save()
+                return HttpResponse('travel plan post success')
+            
+        else:
+            plan_form = PlanForm()
     
-def diary(request):
-    
-    if request.method == 'POST':
-        diary_form = DiaryForm(request.POST,request.FILES)
-        if diary_form.is_valid():
-            if request.user is not None and request.user.is_active:
-                user_now = request.user.username     
-                
-                province = request.POST['ddlProvince']
-                city = request.POST['ddlCity']
-
-                new_diary = Diary()
-                new_diary.Username = Account.objects.get(Username=user_now)
-                new_diary.Title = diary_form.cleaned_data['Title']
-                new_diary.Passage = diary_form.cleaned_data['Passage']
-                new_diary.Tag = diary_form.cleaned_data['Tag']
-                new_diary.Image = diary_form.cleaned_data['Image']
-                new_diary.Destination = province+' '+city
-                new_diary.save()        
-                
-                
-                return HttpResponse('diary post success')
+        return render_to_response('go_out.html',locals())
     else:
-        diary_form = DiaryForm()
+        return HttpResponse('please login first')
+        
+            
+def diary(request):
+    if request.user is not None and request.user.is_active:
+        user_now = request.user.username 
+        if request.method == 'POST':
+            diary_form = DiaryForm(request.POST,request.FILES)
+            if diary_form.is_valid():
+                    
+                    
+                    province = request.POST['ddlProvince']
+                    city = request.POST['ddlCity']
+    
+                    new_diary = Diary()
+                    new_diary.Username = Account.objects.get(Username=user_now)
+                    new_diary.Title = diary_form.cleaned_data['Title']
+                    new_diary.Passage = diary_form.cleaned_data['Passage']
+                    new_diary.Tag = diary_form.cleaned_data['Tag']
+                    new_diary.Image = diary_form.cleaned_data['Image']
+                    new_diary.Destination = province+' '+city
+                    new_diary.save()        
+                    
+                    
+                    return HttpResponse('diary post success')
+        else:
+            diary_form = DiaryForm()
+    else:
+        return HttpResponse('please login first')
     return render_to_response('yj.html',locals())    
     
     

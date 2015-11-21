@@ -176,7 +176,7 @@
     </style>
 </head>
 <body>
-    <div style="position: relative;z-index: -1">
+    <div>
         <img class="blur" src="src/img/back_2.jpg" height="100%" width="100%"/>
     </div>
     <div id="header">
@@ -193,8 +193,14 @@
     </div>
     <div id="content">
         <ul>
-            <li><h5>destination<input></h5></li>
-            <li><h5>time<i </h5></li>
+        <form action="" method="post" >
+        {% for field in plan_form %}
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }} </p>
+        <p>{{ field.errors }}</p>
+        {% endfor %}
+        <input tabindex="10" id="publish_note" value="Submit" type="submit"  name="note_submit" />
+         </form>
         </ul>
     </div>
     <div id="footer">Copyright k&a</div>

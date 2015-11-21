@@ -32,7 +32,7 @@ class Travel_plan(models.Model):
         End_date = models.DateField()
         People_amount = models.IntegerField()
         Budget = models.IntegerField() 
-        Demand = models.CharField(max_length = 100,blank=True)        
+        Demand = models.CharField(max_length = 100,blank=True,null=True)        
         
         def __unicode__(self) :
             return self.Destination
