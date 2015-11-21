@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>去哪里？</title>
+    <style type="text/css">
+        p{
+            font-family: monospace, monospace;
+        }
+        input{
+            border-radius: 5px;
+        }
+        #header>h1{
+            color:#ffff99;
+        }
+        h1, h2, h3, h4, h5, h6,a,li {
+            color:black;
+            font-weight: 700;
+            font-family: monospace, monospace;
+        }
+
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+            color: yellow;
+            text-decoration: none;
+        }
+
+        a {
+            color: #d52349;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        div#header {background-color:red;clear:both;text-align:center;}
+        div#footer {background-color:red;clear:both;text-align:center;}
+        div#header>button{
+            position: relative;
+            left: 30%;
+        }
+
+        .content{
+
+            border-radius: 5px;
+            border:4px solid #000000;
+            width:80%;
+            height: 1000px;
+            background: #fff;
+            position: relative;
+
+        }
+        .tab{
+            border-radius: 2px;
+            margin-top: 12px;
+            width: 80％;
+            height: 30px;
+            list-style: none;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 20;
+
+
+
+        }
+        li{
+            float: left;
+            height: 28px;
+            padding: 0 25px;
+            border: 4px solid #000000;
+            border-radius: 5px;
+            margin-right: 10px;
+            line-height: 30px;
+            cursor: pointer;
+            background: #FAFAFA;
+            color: #000000;
+            font-size: 14px;
+            position: relative;
+            top:-4px;
+
+
+        }
+        .tab-active{
+            border-radius: 5px;
+            border-bottom: 6px solid #ffffff;
+            border-top-width: 4px;
+            height: 28px;
+            background: #fff;
+            color: #0461B1;
+            font-weight: bold;
+            position: relative;
+
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div >
+        <div id="header">
+            <h1>Travelink</h1>
+        </div id = "header">
+    </div >
+    <div style="position: relative;left: 10%">
+        <ul class="tab ">
+            <li class="tab-active">推荐文章</li>
+            <li>推荐同伴</li>
+        </ul>
+        <div class="content">
+            <div class="inner">
+                标签1内容
+            </div>
+            <div class="inner"style="display:none">
+                标签2内容
+            </div>
+        </div>
+    </div>
+    <script>
+        var lists = $('.tab li');
+        var contents = $('.content .inner');
+
+        function bindEvent(){
+
+            lists.each(function(index_li, li){
+                $(this).on('click', function(event){
+
+                    lists.removeClass('tab-active');
+                    $(this).addClass('tab-active');
+
+                    contents.each(function(index_content, content){
+                        if(index_li === index_content){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+        }
+
+        function init(){
+            bindEvent();
+        }
+
+        init();
+
+    </script>
+    <div id="footer">Copyright k&a</div>
+</body>
+</html>

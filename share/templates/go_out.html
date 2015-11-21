@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ch">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>I want to go around</title>
     <style type="text/css">
         p{
             font-family: monospace, monospace;
@@ -12,10 +12,8 @@
             border-radius: 5px;
         }
         nav{
-            position: relative;
-            top:20px;
-
-
+            position: absolute; z-index:2;
+            top:100px;width: 100%;
         }
         #nav > ul {
             margin: 0;
@@ -32,10 +30,10 @@
 
         #nav > ul > li > a {
             border-radius: 5px;
-            color: #5d5d5d;
+            color: #FAFAFA;
             text-decoration: none;
             padding: .6em 1.2em 0.6em 1.2em;0
-            -moz-transition: background-color .25s ease-in-out;
+        -moz-transition: background-color .25s ease-in-out;
             -webkit-transition: background-color .25s ease-in-out;
             -ms-transition: background-color .25s ease-in-out;
             transition: background-color .25s ease-in-out;
@@ -57,7 +55,8 @@
             top:-40px;
             font-weight: 300;
         }
-        h1, h2, h3, h4, h5, h6,a,li {
+
+        h1, h2, h3, h4, h5, h6 ,a{
             color: #ffff99;
             font-weight: 700;
             font-family: monospace, monospace;
@@ -66,7 +65,6 @@
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
             color: yellow;
             text-decoration: none;
-            font-family: monospace, monospace;
         }
 
         a {
@@ -77,13 +75,16 @@
         a:hover {
             text-decoration: underline;
         }
-        div#header {background-color:red;clear:both;text-align:center;}
-        div#footer {background-color:red;clear:both;text-align:center;}
-        nav>button{
-            position: relative;
-            left: 90%;
+        div#header {clear:both;text-align:center; position: absolute; z-index:2;
+            top:0;width: 100%;}
+        div#footer {clear:both;text-align:center;position: absolute; z-index:2;
+            top:95%;width: 100%;}
+        div#header>button{
+            position: absolute;
+            left: 30%;
         }
-        div#sidemenu {background-color: transparent;height:1000px;width:20% ;float:left;}
+        div#sidemenu {background-color: transparent;height:1000px;width:20% ;float:left;position: absolute; z-index:100;
+            top:0;}
         div#sidemenu>div{
             width: 50px;
             height: 50px;
@@ -102,8 +103,9 @@
             height:1000px;
             width:60%;
             float:left;
-            position: relative;
-            top:60px;
+
+            position: absolute; z-index:2;
+            top:200px;
 
         }
         div#content>div>form>input{
@@ -122,14 +124,25 @@
             overflow-y: scroll;
             border-radius: 7px;
         }
-        div#content>div>form>input{
-            position: relative;
-            top:-8px;
+        div#content>ul>li>h5{
+            border-radius: 5px;
+
+            color: #FAFAFA;
+            background: #669999;
+            text-decoration: none;
+            padding: .3em .6em .3em .6em;
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+            outline: 0;
+            display: inline-block;
+            margin: 1em 0em 1em 0em;
         }
 
         div#passage{
             background-color: #2daae4;
-            height:60%;width:100%;
+            height:100%;width:100%;
         }
         div#passage>a{
             border-radius: 10px;
@@ -138,7 +151,7 @@
         div#passage>div{
             width: 100%;
             border-radius: 10px;
-            height: 50px;
+            background-color: #CCE8F4;
         }
         a.current{
             background: #151112;
@@ -146,82 +159,46 @@
             font-weight: 500;
             border-radius: 5px;
             padding: .3em 0.5em 0.3em 0.5em;
-            text-decoration: none;
 
         }
         .text {
             position: relative;
             top:30px;
         }
+        .blur {
+            filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+
+            -webkit-filter: blur(10px); /* Chrome, Opera */
+            -moz-filter: blur(10px);
+            -ms-filter: blur(10px);
+            filter: blur(10px);
+
     </style>
 </head>
 <body>
-
-<div id="container">
-
+    <div style="position: relative;z-index: -1">
+        <img class="blur" src="src/img/back_2.jpg" height="100%" width="100%"/>
+    </div>
     <div id="header">
         <h1>Travelink</h1>
-    </div id = "header">
-
-    <nav id="nav">
-        <ul>
-            <li class="current"><a>Home</a></li>
-            <li><a href="#">travel blog</a></li>
-            <li><a href="go_out.html">go travel</a></li>
-
-        </ul>
-        <form action="/login/">
-            <button>login</button>
-        </form>
-        <p>{{user_now}}</p>
-        <form action="" method="get">
-            <input type="submit" name="logout" value="Logout"/>
-        </form>
-
-    </nav>
-    <div id="sidemenu">
-
-            <div>
-                <a>none</a>
-            </div>
-            <div>
-               <a>none</a>
-            </div>
-            <div>
-                <a>none</a>
-            </div>
+    </div >
+    <div>
+        <nav id="nav">
+            <ul>
+                <li ><a href="../../">Home</a></li>
+                <li><a href="#">travel blog</a></li>
+                <li class = "current"><a href="#">go travel</a></li>
+            </ul>
+        </nav>
     </div>
-
     <div id="content">
-        <div>
-            <form action="" method="get" color = "blue">
-                <a style="text-decoration: none;">twiter</a>
-                <a class="current" href="yj.html">dairy</a>
-                <textarea  class ="text" name="yj" cols="86" rows="40"></textarea>
-                <p><input type="text" name = "yj_tag"/></p>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-        <div id = "passage">
-            {%for passage in  blog_list%}
-                <p>{{passage.Title}}</p>
-                <div >
-                    {{passage.Passage}}
-                </div>
-                <a>
-                    #{{passage.Tag}}
-                </a>
-            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=2)" width="100%" color=#987cb9 SIZE=8>
-            {%endfor%}
-        </div>
-    <div id="sidemenu">
-
-
+        <ul>
+            <li><h5>destination<input></h5></li>
+            <li><h5>time<i </h5></li>
+        </ul>
     </div>
-
-
-</div>
-
     <div id="footer">Copyright k&a</div>
+
+
 </body>
 </html>

@@ -4,14 +4,11 @@ from share.models import Account,Blog
 from django.contrib import auth
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
-from share.forms import BlogForm
+from share.forms import BlogForm,DiaryForm,AccountForm
 # Create your views here.
 
 def home(request):
-    blog_list = Blog.objects.all()
-    
-    if 'login' in request.GET:
-        login_view(request)
+    blog_list = Blog.objects.all()   
     
     if 'logout' in request.GET:
         logout(request)
@@ -23,31 +20,50 @@ def home(request):
         
     if 'yj' in request.GET:
         author = Account.objects.get(Username=user_now)
-        blog = Blog.objects.create(Username=author,Title=request.GET['yj_title'],
-                                   Passage=request.GET['yj'])
+        blog = Blog.objects.create(Username=author,
+                                   Passage=request.GET['yj'],
+                                   Tag = request.GET['yj_tag']     )
         return HttpResponseRedirect("../../",locals())                        
     return render_to_response('index.html',locals())
     
 
 def login_view(request):
-    username = request.GET['username']
-    password = request.GET['password']
-    user = auth.authenticate(username=username, password=password)
-    if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
-        auth.login(request, user)
-        # Redirect to a success page.
-        return HttpResponseRedirect("../../")
-    else:
-        # Show an error page
-        return HttpResponseRedirect("/account/invalid/")
-
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            # Correct password, and the user is marked "active"
+            auth.login(request, user)
+            # Redirect to a success page.
+            return HttpResponseRedirect("../../")
+        else:
+            # Show an error page
+            return HttpResponseRedirect("/account/invalid/")
+    return render_to_response('login.html',locals())
 
 
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("../",locals())
 
+def register_view(request):
+    if request.method == 'POST':
+        account_form = AccountForm(request.POST,request.FILES)
+        if account_form.is_valid():
+            account_form.save()    
+            new_user = User()
+            new_user.username = account_form.cleaned_data['Username']
+            new_user.password = account_form.cleaned_data['password']
+            new_user.email = account_form.cleaned_data['Email']
+            new_user.save()
+            return HttpResponse('register success')        
+    else:
+        account_form = AccountForm()
+    return render_to_response('register_view.html',locals())
+
+
+       
 def test_blog(request):
     if request.method == 'POST':
         blog_form = BlogForm(request.POST,request.FILES)
@@ -58,3 +74,34 @@ def test_blog(request):
         blog_form = BlogForm()
     blog ='http://127.0.0.1:8000/media/' + str(Blog.objects.get(id=16).Image)
     return render_to_response('testblog.html',locals())
+    
+def go_out(request):
+    
+    return render_to_response('go_out.html',locals())
+    
+def diary(request):
+    
+    if request.method == 'POST':
+        diary_form = DiaryForm(request.POST,request.FILES)
+        if diary_form.is_valid():
+            province = request.POST['ddlProvince']
+            city = request.POST['ddlCity']
+            diary_form.Destination = province+city           
+            diary_form.save()
+            
+            return HttpResponse('diary post success')
+    else:
+        diary_form = DiaryForm()
+    return render_to_response('yj.html',locals())    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
