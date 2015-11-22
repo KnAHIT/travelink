@@ -91,7 +91,7 @@ DATABASES = {
     }
 }
 
-
+STATIC_PATH= os.path.join(os.path.dirname(__file__), '../media').replace('\\','/')
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

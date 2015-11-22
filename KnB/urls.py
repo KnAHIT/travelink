@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^login/',login_view),
     url(r'^go_out.html/',go_out),
     url(r'^yj.html/',diary),
-    url(r'^register_view.html/',register_view)
+    url(r'^register_view.html/',register_view),
+    url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
