@@ -2,6 +2,108 @@
 <html lang="zh-ch">
 <head>
     <meta charset="utf-8">
+     <style type="text/css">
+        p{
+            font-family: monospace, monospace;
+        }
+        input{
+            border-radius: 5px;
+        }
+        h2, h3, h4, h5, h6,a,li {
+            color:black;
+            font-weight: 700；
+            font-family: monospace, monospace;
+        }
+
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+            color: yellow;
+            text-decoration: none;
+            font-family: monospace, monospace;
+        }
+        #header>h1 {
+            font-size: 30px;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,.2);
+        }
+        a {
+            color: #d52349;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        div#header {background-color:red;clear:both;text-align:center;}
+        div#footer {background-color:red;clear:both;text-align:center;};}
+        div#header>button{
+            position: relative;
+            left: 30%;
+        }
+        textarea#passage{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            position: relative;
+            resize: none;
+            width: 60%;
+            height: 750px;
+            max-width: 600%;
+            max-height: 750px;
+            overflow-y: visible;
+            overflow-y: scroll;
+            border-radius: 7px;
+        }
+        textarea#tags{
+
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            position: relative;
+            resize: none;
+            width: 60%;
+            height: 16px;
+            max-width: 600%;
+            max-height: 150px;
+            overflow-y: visible;
+            overflow-y: scroll;
+            border-radius: 7px;
+        }
+
+        input#title{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+            border-color: black;
+            width: 60%;
+        }
+        button{
+            font-size: 16px;
+            line-height: 150%;
+            letter-spacing: 1px;
+            border-width: 5px;
+
+        }
+        input#publish_note{
+            background-color: peru ;
+            border-radius: 7px;
+
+        }
+        input#cancel_note{
+            background-color: peru ;
+            border-radius: 7px;
+            position: relative;
+            left:70%;
+        }
+        div{
+            margin: 30px 0 0 0;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -158,11 +260,14 @@
         <h1>Travelink</h1>
     </div id = "header">
     <form class="city_title action="" method="post" enctype="multipart/form-data" onsubmit="manSub(this);return false;name="spc">
-        {% for field in diary_form %}
-        <p>{{ field.label_tag }}</p>
-        <p>{{ field }} </p>
-        <p>{{ field.errors }}</p>
-        {% endfor %}
+         <h2>新加游记</h2>
+            <h4>题目:</h4>
+            <input type="text" name ="Title" id ="title">
+            <h4>正文：</h4>
+            <textarea type="text" name = "Passage" id="passage"></textarea>
+            <h4>标签：</h4>
+            <textarea type="text" name = "Tag" id="tags"></textarea>
+            <h5>图片：<input type="file" class="" name="Image"> </h5>
         <div class="row note-privacy">
             <label style="font-size: 10px" >set permission</label>
             <label style="font-size: 10px">

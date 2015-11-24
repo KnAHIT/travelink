@@ -32,4 +32,4 @@ class AccountForm(forms.ModelForm):
 class PlanForm(forms.ModelForm):
     class Meta:
         model = Travel_plan
-        fields = ['Destination','Start_place','Start_date','End_date','People_amount','Budget','Demand']
+        fields = ['Start_date','End_date','People_amount','Budget','Demand']

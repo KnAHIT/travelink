@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
 from share.forms import BlogForm,DiaryForm,AccountForm,PlanForm
 from django.db.models import Q
+from itertools import chain
 # Create your views here.
 
 def home(request):
@@ -86,8 +87,8 @@ def go_out(request):
                 new_plan = Travel_plan()
                 
                 new_plan.Username = Account.objects.get(Username=user_now)
-                new_plan.Destination = plan_form.cleaned_data['Destination']
-                new_plan.Start_place = plan_form.cleaned_data['Start_place']
+                new_plan.Destination = request.POST['Destination_province'] + " " + request.POST['Destination_city']
+                new_plan.Start_place = request.POST['Start_place_province'] + " " + request.POST['Start_place_city']
                 new_plan.Start_date = plan_form.cleaned_data['Start_date']
                 new_plan.End_date = plan_form.cleaned_data['End_date']
                 new_plan.People_amount = plan_form.cleaned_data['People_amount']
@@ -137,8 +138,8 @@ def suggest_blog(request):
     if request.user is not None and request.user.is_active:
         user_now = request.user.username 
         account = Account.objects.get(Username=user_now)
-        plan = Travel_plan.objects.get(Username = account)
-        
+        plan = Travel_plan.objects.get(Username=account)
+        #get diary
         destination_province = plan.Destination.split()[0] 
         destination_city = plan.Destination.split()[1]       
         diary_city_list = Diary.objects.filter(
@@ -149,11 +150,20 @@ def suggest_blog(request):
                                             Q(Destination__icontains=destination_province)|
                                             Q(Tag__icontains=destination_province) 
                                             )
-                
-        
+        #get other account
+        other_plan_list = Travel_plan.objects.filter(Destination__icontains=destination_city).exclude(Username=account)#.filter(Start_date__month=plan.Start_date.month)
+
+        plan_list = []
+        for other_plan in other_plan_list:
+            datedelta =  abs((plan.Start_date - other_plan.Start_date).days)
+            
+            if (datedelta<8):
+                plan_list.append(other_plan)
+
+
     else:
         return HttpResponse('please login first')
-    return render_to_response('testsuggest.html',locals())
+    return render_to_response('suggest.html',locals())
     
     
     

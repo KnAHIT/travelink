@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>去哪里？</title>
+    <style type="text/css">
+        body{
+            background: black;
+        }
+        p{
+            font-family: monospace, monospace;
+            color: whitesmoke;
+        }
+        input{
+            border-radius: 5px;
+        }
+        #header>h1{
+            color:#ffff99;
+        }
+        h1, h2, h3, h4, h5, h6,a,li {
+            color:whitesmoke;
+            font-weight: 300;
+            font-family: monospace, monospace;
+        }
+
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+            color: yellow;
+            text-decoration: none;
+        }
+
+        a {
+            color: #d52349;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        div#header {background-color:red;clear:both;text-align:center;}
+        div#footer {background-color:red;clear:both;text-align:center;}
+        div#header>button{
+            position: relative;
+            left: 30%;
+        }
+
+        .content{
+
+            border-radius: 5px;
+            border:4px solid #778899;
+
+            height: 1000px;
+            background: black;
+
+
+        }
+        .tab{
+            border-radius: 2px;
+            margin-top: 12px;
+            width: 80％;
+            height: 30px;
+            border-bottom: #778899;
+            list-style: none;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 20;
+
+
+
+        }
+        li{
+            float: left;
+            height: 28px;
+            padding: 0 25px;
+            border-bottom: 5px solid #000000;
+            border-radius: 5px;
+            margin-right: 10px;
+            line-height: 30px;
+            cursor: pointer;
+            background: black;
+            color: whitesmoke;
+            font-size: 14px;
+            position: relative;
+            top:-4px;
+
+
+        }
+        .tab-active{
+            border-radius: 5px;
+            border-bottom:  #778899;
+            border-top-width: 4px;
+            height: 28px;
+            background: midnightblue;
+            color: #0461B1;
+            font-weight: bold;
+            position: relative;
+
+        }
+        .main{ width:80%; height:100%; float: right;background-color:yellow; display:inline}
+        .avatar{width: 20%; height:100%; float: left;text-align: center; display:inline;vertical-align: middle;background: green}
+        .account{height: 220px;width: 80%;position: relative;top:30px;left: 10%;border-radius: 8px;border: #808080 outset 8px}
+        .aticle{
+            height: 300px;
+            width: 90%;
+            border:  #778899 solid 3px;
+            position: relative;
+            background: #778899;
+            left: 5% ;
+            margin:  -5px 0 0 0
+            -webkit-box-shadow: 2px 2px 20px #778899;
+            box-shadow: 2px 2px 20px #778899;
+            margin: 30px 0 0 0;
+        }
+        .aticle>h3{
+            position: relative;left:7%;
+
+        }
+        .aticle>p{
+            position: relative;left:2%;
+            width: 96%;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div >
+        <div id="header">
+            <h1>Travelink</h1>
+        </div id = "header">
+    </div >
+    <div style="position: relative;background: black">
+        <ul class="tab ">
+            <li class="tab-active">推荐文章</li>
+            <li>推荐同伴</li>
+        </ul>
+        <div class="content">
+            <div class="inner">
+                {% for diary in diary_city_list %}
+                <div class="aticle">
+                    <div STYLE="width: 20%;">
+                        <img src="http://127.0.0.1:8000/media/{{diary.Username.Image}}" style="display:inline;border-radius: 50%;"height="60px" width="60px">
+                        <p style="display: inline;position: relative;top:-23px">{{diary.Username.Username}}</p>
+                    </div>
+                    <h3> {{diary.Tile}} </h3>
+                    <p>{{diary.Passage}}
+                        <a>更多</a></p>
+                        {%if diary.Image%}
+                        <img src="http://127.0.0.1:8000/media/{{diary.Image}}" style="display:inline;"height="100px" width="100px">
+                        {%endif%}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="inner"style="display:none">
+                
+                {%for plan in other_plan_list%}
+                <div class="account" >
+                    <div class = "main">
+                        <p>{{plan.Username.Username}}</p>
+                        <p>出发地：{{plan.Start_place}}</p>
+                        <p>目的地：{{plan.Destination}}</p>
+                        
+                        <p>出发日期：{{plan.Start_date}}</p>
+                        <p>回程日期：{{plan.End_date}}</p>
+                        <p>要求：{{plan.Demand}}</p>
+                    </div>
+
+                    <div class="avatar">
+                        <img src="http://127.0.0.1:8000/media/{{plan.Username.Image}}" width="90px" height="120px";>
+
+                    </div>
+
+
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        var lists = $('.tab li');
+        var contents = $('.content .inner');
+
+        function bindEvent(){
+
+            lists.each(function(index_li, li){
+                $(this).on('click', function(event){
+
+                    lists.removeClass('tab-active');
+                    $(this).addClass('tab-active');
+
+                    contents.each(function(index_content, content){
+                        if(index_li === index_content){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+        }
+
+        function init(){
+            bindEvent();
+        }
+
+        init();
+
+    </script>
+    <div id="footer">Copyright k&a</div>
+</body>
+</html>

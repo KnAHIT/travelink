@@ -112,3 +112,4 @@ DEFAULT_CHARSET = 'utf-8'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_PATH= os.path.join(os.path.dirname(__file__), '../src').replace('\\','/')

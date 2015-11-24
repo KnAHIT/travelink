@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^yj.html/',diary),
     url(r'^register/',register_view),
     url(r'^suggest/',suggest_blog),
-    
+    url(r'^src/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
+
     
 ]
 
