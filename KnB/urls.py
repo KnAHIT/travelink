@@ -16,19 +16,20 @@ Including another URLconf
 #coding=utf-8 
 from django.conf.urls import include, url
 from django.contrib import admin
-from share.views import home,test_blog,login_view,go_out,diary,register_view
+from share.views import home,login_view,go_out,diary,register_view,suggest_blog
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$',home),
-    url(r'^test/',test_blog),
+    
     url(r'^login/',login_view),
     url(r'^go_out.html/',go_out),
     url(r'^yj.html/',diary),
+    url(r'^suggest/',suggest_blog),
     url(r'^register_view.html/',register_view),
-    url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
+    url(r'^src/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
