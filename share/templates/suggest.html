@@ -13,6 +13,52 @@
             font-family: monospace, monospace;
             color: whitesmoke;
         }
+        nav{
+            position: relative;
+            top:20px;
+
+
+        }
+        #nav > ul {
+            margin: 0;
+            position: relative;
+            left:30%;
+
+        }
+
+        #nav > ul > li {
+            display: inline-block;
+            font-style: italic;
+            margin: 0 2em 0 2em;
+        }
+
+        #nav > ul > li > a {
+            border-radius: 5px;
+            color: #5d5d5d;
+            text-decoration: none;
+            padding: .6em 1.2em 0.6em 1.2em;0
+        -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+            outline: 0;
+        }
+
+        #nav > ul > li:hover > a, #nav > ul > li.active > a {
+            background: #f3f3f3;
+        }
+
+        #nav > ul > li.current > a {
+            background: #d52349;
+            color: #fff !important;
+            font-weight: 700;
+        }
+        #nav>form{
+            position: relative;
+            left:75%;
+            top:-40px;
+            font-weight: 300;
+        }
         input{
             border-radius: 5px;
         }
@@ -28,7 +74,9 @@
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
             color: yellow;
             text-decoration: none;
-        }
+            font-family: monospace, monospace;
+        
+        }   
 
         a {
             color: #d52349;
@@ -65,9 +113,10 @@
             margin-bottom: -1px;
             position: relative;
             z-index: 20;
+            left: -20%;
 
 
-
+        
         }
         li{
             float: left;
@@ -97,8 +146,8 @@
             position: relative;
 
         }
-        .main{ width:80%; height:100%; float: right;background-color:yellow; display:inline}
-        .avatar{width: 20%; height:100%; float: left;text-align: center; display:inline;vertical-align: middle;background: green}
+        .main{ width:80%; height:100%; float: right;background-color:grey; display:inline}
+        .avatar{width: 20%; height:100%; float: left;text-align: center; display:inline;vertical-align: middle;background: #FFF0F5}
         .account{height: 220px;width: 80%;position: relative;top:30px;left: 10%;border-radius: 8px;border: #808080 outset 8px}
         .aticle{
             height: 300px;
@@ -130,7 +179,17 @@
             <h1>Travelink</h1>
         </div id = "header">
     </div >
-    <div style="position: relative;background: black">
+    <div>
+            <nav id="nav">
+                <ul>
+                    <li ><a href="../../">Home</a></li>
+                    <li><a href="#">travel blog</a></li>
+                    <li><a href="../../go_out.html">go travel</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    <div style="position: relative;background: black;top:60px">
         <ul class="tab ">
             <li class="tab-active">推荐文章</li>
             <li>推荐同伴</li>
@@ -147,7 +206,7 @@
                     <p>{{diary.Passage}}
                         <a>更多</a></p>
                         {%if diary.Image%}
-                        <img src="http://127.0.0.1:8000/media/{{diary.Image}}" style="display:inline;"height="100px" width="100px">
+                        <img src="http://127.0.0.1:8000/media/{{diary.Image}}" style="display:inline;"height="150px" width="180px">
                         {%endif%}
                 </div>
                 {% endfor %}

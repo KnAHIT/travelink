@@ -7,7 +7,7 @@
     <title>我想去看看世界</title>
     <style type="text/css">
         body{
-            background: white;
+            background: black;
         }
         p{
             font-family: monospace, monospace;
@@ -252,6 +252,24 @@
             </ul>
         </nav>
     </div>
+    {%if travel_plan%}
+    <div id="content">
+        <ul>
+            {%for plan in travel_plan%}
+            <li><h2>我的旅行计划 </h2></li>
+            <li><h5>目的地：{{plan.Destination}}</h5></li>
+            <li><h5>出发地：{{plan.Start_place}}</h5></li>
+            <li><h5>出发时间：{{plan.Start_date}}</h5></li>
+            <li><h5>结束时间：{{plan.End_date}}</h5></li>
+            <li><h5>人数：{{plan.People_amount}}</h5></li>
+            <li><h5>预算：{{plan.Budget}}</h5></li>
+            <li><h5>其他需求：{{plan.Demand}}</h5></li>
+            {%endfor%}
+            <a href="../../suggest">查看推荐信息</a>
+        </ul>
+    </div>
+    {{travel_plan}}
+    {%else%}
     <div id="content">
         <ul>
             <form class="city_title" action="" method="post" onsubmit="manSub(this);return false;" name="spc">
@@ -292,7 +310,10 @@
                     </script>
         </ul>
     </div>
-<
+    {%endif%}
+
+
+
     <div id="footer">Copyright k&a</div>
 
 

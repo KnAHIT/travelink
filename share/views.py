@@ -60,7 +60,7 @@ def register_view(request):
             new_account.save()
             
             User.objects.create_user(new_account.Username, new_account.Email, account_form.cleaned_data['password'])
-            return HttpResponseRedirect("/login/")        
+            return render_to_response('returnlogin.html',locals())        
     else:
         account_form = AccountForm()
     return render_to_response('register.html',locals())
@@ -75,12 +75,13 @@ def test_blog(request):
             return HttpResponse('image upload success')
     else:
         blog_form = BlogForm()
-    blog ='http://127.0.0.1:8000/media/' + str(Blog.objects.get(id=16).Image)
+    blog =4 + str(Blog.objects.get(id=16).Image)
     return render_to_response('testblog.html',locals())
     
 def go_out(request):
     if  request.user is not None and request.user.is_active:
         user_now = request.user.username
+        travel_plan = Travel_plan.objects.filter(Username=Account.objects.get(Username=user_now))
         if request.method == 'POST':
             plan_form = PlanForm(request.POST)
             if plan_form.is_valid():
@@ -162,12 +163,21 @@ def suggest_blog(request):
 
 
     else:
-        return HttpResponse('please login first')
+        return HttpResponseRedirect("/login/")
     return render_to_response('suggest.html',locals())
     
     
-    
-    
+def my_info(request):
+    if request.user is not None and request.user.is_active:
+        user_now = request.user.username 
+        account = Account.objects.get(Username=user_now)
+        travel_plan = Travel_plan.objects.filter(Username=account)
+        diary_list = Diary.objects.filter(Username=account)
+        blog_list = Blog.objects.filter(Username=account)
+
+    else:
+        return HttpResponseRedirect("/login/")
+    return render_to_response('my_info.html',locals())
     
     
     

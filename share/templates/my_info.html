@@ -1,0 +1,17 @@
+<li>{%if travel_plan%}
+{%for plan in travel_plan%}
+{{plan.Destination}}
+{%endfor%}</li>
+<li>
+{%endif%}
+{%if diary_list%}
+{%for diary in diary_list%}
+{{diary.Title}}
+{%endfor%}
+{%endif%}</li>
+<li>
+{%if blog_list%}
+{%for blog in blog_list%}
+{{blog.Passage}}
+{%endfor%}
+{%endif%}</li>
