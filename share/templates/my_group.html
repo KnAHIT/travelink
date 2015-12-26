@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <script src="/src/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/src/js/main.js"></script>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>我想去看看世界</title>
+    <style type="text/css">
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        p{
+            font-family: monospace, monospace;
+        }
+        input{
+            border-radius: 5px;
+        }
+        nav{
+            position: relative;
+
+            width: 100%;
+
+            text-align: center;
+        }
+        #nav > ul {
+
+        }
+        #nav > ul > li {
+            display: inline-block;
+            font-style: italic;
+            margin: 2em 2em 0 2em;
+        }
+        #nav > ul > li > a {
+            border-radius: 5px;
+            color:#d52349;
+            text-decoration: none;
+            padding: .6em 1.2em 0.6em 1.2em;
+            -moz-transition: background-color .25s ease-in-out;
+            -webkit-transition: background-color .25s ease-in-out;
+            -ms-transition: background-color .25s ease-in-out;
+            transition: background-color .25s ease-in-out;
+            outline: 0;
+        }
+        #nav > ul > li:hover > a, #nav > ul > li.active > a {
+            background: #f3f3f3;
+        }
+        #nav > ul > li.current > a {
+            background: #d52349;
+            color: #fff !important;
+            font-weight: 700;
+        }
+
+        h1, h2, h3, h4, h4, h6 ,a{
+            color: black;
+            font-weight: 700;
+            font-family: monospace, monospace;
+        }
+        h1 a, h2 a, h3 a, h4 a, h4 a, h6 a {
+            color: black;
+            text-decoration: none;
+        }
+        a {
+            color: #d52349;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        div#header {background-color:red;clear:both;text-align:center;}
+        div#footer {background-color:red;clear:both;text-align:center;}
+        div#header>button{
+            position: absolute;
+            left: 30%;
+        }
+
+        div#content {
+            width: 100%;
+            float: none;
+
+
+        }
+
+        #group{
+
+            margin-top: 100px;
+            margin-bottom: 20px;
+            background: white none repeat scroll 0 0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 5px 10px #ccc;
+
+            width: 395px;
+
+        }
+
+        .z{
+            float: left;
+            color: red;
+            text-shadow:1px 1px 2px black;
+
+        }
+
+
+        a.current{
+            background: #151112;
+            color: #fff !important;
+            font-weight: 500;
+            border-radius: 5px;
+            padding: .3em 0.5em 0.3em 0.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div id="header">
+    <h1>Travelink</h1>
+</div >
+<div>
+    <nav id="nav">
+        <ul>
+            <li ><a href="../../" >Home</a></li>
+           <li><a href="../../personal_index.html">我的空间</a></li>
+            <li ><a href="">去旅游</a></li>
+        </ul>
+    </nav>
+</div>
+<HR color=whitesmoke SIZE="4">
+<div id="content">
+        <div style="float:left;width: 50%;text-align: center"><!--这里是左边  显示 我加入的组群-->
+            <div>
+                <h3 class="z">我加入的群组</h3>
+            </div>
+            <div style="position: relative;">
+                <div id = "group" style="position: relative; left: 20%" >
+                    数字尾巴极为重视阅读体验，无论是在数字尾巴主站还是『数字尾巴客户端』，我们一直在优化和改进阅读体验。在这一次的全新 Android 版，从字号、到间距再到排版，均做了大量细节上的调整，为你带来不止好看，更显精致的阅读体验。
+
+                    不仅是阅读体验，我们还带来全新的评论阅读，互动体验，一切都变得更加自然而然，易用好用。
+
+                </div>
+                <div id = "group" style="position: relative; left: 20%">
+                    数字尾巴极为重视阅读体验，无论是在数字尾巴主站还是『数字尾巴客户端』，我们一直在优化和改进阅读体验。在这一次的全新 Android 版，从字号、到间距再到排版，均做了大量细节上的调整，为你带来不止好看，更显精致的阅读体验。
+
+                    不仅是阅读体验，我们还带来全新的评论阅读，互动体验，一切都变得更加自然而然，易用好用。
+
+                </div>
+                <div id = "group" style="position: relative; left: 20%">
+                    数字尾巴极为重视阅读体验，无论是在数字尾巴主站还是『数字尾巴客户端』，我们一直在优化和改进阅读体验。在这一次的全新 Android 版，从字号、到间距再到排版，均做了大量细节上的调整，为你带来不止好看，更显精致的阅读体验。
+
+                    不仅是阅读体验，我们还带来全新的评论阅读，互动体验，一切都变得更加自然而然，易用好用。
+
+                </div>
+            </div>
+
+        </div>
+
+        <div style="float: right;width: 50%;text-align: center"><!--这里是右边  显示 我加入的组群-->
+            <div style="display: none"><!--做了隐藏处理 如果有我创建的族群显示这块 没有  显示下面-->
+                <div>
+                    <h3 class="z">我组建的群组</h3>
+                </div>
+                <div style=" clear:both;position: relative;">
+                    <div id = "group" style="position: relative; left: 20%">
+                        数字尾巴极为重视阅读体验，无论是在数字尾巴主站还是『数字尾巴客户端』，我们一直在优化和改进阅读体验。在这一次的全新 Android 版，从字号、到间距再到排版，均做了大量细节上的调整，为你带来不止好看，更显精致的阅读体验。
+
+                        不仅是阅读体验，我们还带来全新的评论阅读，互动体验，一切都变得更加自然而然，易用好用。
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div ><!-- 如果没有有我创建的族群显示这块 有  显示上面-->
+                <div>
+                    <h3 class="z" style="position: relative;top:-100px">创建群组</h3>
+                </div>
+                <div style="position: relative; ">
+                    <div id = "group" style="position: relative; left: 20%" >
+                        <h2>我的旅行计划 </h2>
+                        {%for plan in travel_plan%}
+
+                        <h4>目的地：{{plan.Destination}}</h4>
+                        <h4>出发地：{{plan.Start_place}}</h4>
+                        <h4>出发时间：{{plan.Start_date}}</h4>
+                        <h4>结束时间：{{plan.End_date}}</h4>
+                        <h4>人数：{{plan.People_amount}}</h4>
+                        <h4>预算：{{plan.Budget}}</h4>
+                        <h4>其他需求：{{plan.Demand}}</h4>
+                        {%endfor%}
+
+                    </div>
+                    <div >
+                        <form action="" method="post" style="">小组名称：<input type="text" name="group_name" />
+                            <input value="创建群组" type="submit"/></form>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+</div>
+
+<div id="footer" style="position: relative;top:100%;">Copyright k&a</div>
+
+</body>
+</html>

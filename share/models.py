@@ -6,7 +6,7 @@ from django.db import models
 class Account(models.Model):    
     Username = models.CharField(max_length=20)
     Email = models.EmailField(max_length=254, blank=True)
-    Image = models.ImageField(upload_to = './upload/headimage/',blank=True)
+    Image = models.ImageField(upload_to = 'upload/headimage/',blank=True,null=True)
     def __unicode__(self) :
         return self.Username
         
@@ -16,7 +16,7 @@ class Blog(models.Model):
     Passage = models.TextField(blank = True, null = True)
     Tag = models.CharField(max_length = 50,blank = True,null=True)
     Date_time = models.DateTimeField(auto_now_add = True)   
-    Image = models.ImageField(upload_to = './upload/',blank = True,null=True)
+    Image = models.ImageField(upload_to = 'upload/',blank = True,null=True)
         
     def __unicode__(self) :
         return self.Title
@@ -43,7 +43,7 @@ class Diary(models.Model):
     Passage = models.TextField(blank = True, null = True)
     Tag = models.CharField(max_length = 50, blank = True,null=True)
     Date_time = models.DateTimeField(auto_now_add = True)   
-    Image = models.ImageField(upload_to = './upload/diary/',blank=True,null=True)
+    Image = models.ImageField(upload_to = 'upload/diary/',blank=True,null=True)
     Destination = models.CharField(max_length=20)
     
     def __unicode__(self) :

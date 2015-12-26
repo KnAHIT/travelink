@@ -2,7 +2,11 @@
 <html lang="ch">
 <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/src/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/src/js/main.js"></script>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>去哪里？</title>
     <style type="text/css">
@@ -69,13 +73,13 @@
             padding: .6em 1.2em 0.6em 1.2em;
 
         }
-        h1, h2, h3, h4, h5, h6,a,li {
+        h1, h2, h6, h4, h5, h6,a,li {
             color: #ffff99;
             font-weight: 700;
             font-family: monospace, monospace;
         }
 
-        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+        h1 a, h2 a, h6 a, h4 a, h5 a, h6 a {
             color: yellow;
             text-decoration: none;
             font-family: monospace, monospace;
@@ -157,7 +161,6 @@
         }
         .account {
             width: 35%;
-            height:300px;
             position: relative;
             top:30px;
             left: 30%;
@@ -177,7 +180,7 @@
             margin-top: 30px;
             margin-bottom: 30px;
         }
-        .aticle>h3{
+        .aticle>h6{
             position: relative;left:7%;
 
         }
@@ -206,11 +209,11 @@
         </div>
         <div style="position: relative;background: black;top:60px">
             <ul class="tab ">
-                <li class="tab-active">推荐文章</li>
-                <li>群组推荐</li>
+                <li >推荐文章</li>
+                <li class="tab-active">群组推荐</li>
             </ul>
             <div class="content">
-                <div class="inner">
+                <div class="inner" style="display:none">
                     {% for diary in diary_city_list %}
                     <div class="aticle">
                         <div STYLE="width: 20%;">
@@ -226,27 +229,33 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div class="inner"style="display:none">
+                <div class="inner">
 
-                    {%for plan in other_plan_list%}
+                    {%for group in group_list%}
                     <div class="account" >
-                        <h3 style="text-align: center">组名</h3>
+                        <h4 style="text-align: center">小组名称：{{group.Name}}</h6>
+                        <p>组长：{{group.Travel_plan.Username.Username}}</p>
 
-                        <div class="image">
-                            <img src="http://127.0.0.1:8000/media/{{passage.Username.Image}}" style="display:inline;border-radius: 50%;"height="60px" width="60px">
-                            <p style="display: inline;font-size: 13px">{{passage.Username.Username}}</p>
+                        {% for member in group.Member.all%}
+                        <div class="col-md-3 col-md-offset-2">
+                            <div class="image">
+                                <img src="http://127.0.0.1:8000/media/{{member.Image}}" style="display:inline;border-radius: 50%;"height="60px" width="60px">
+                                <p style="display: inline;font-size: 13px"><a>{{member.Username}}</a></p>
+                            </div>
+
                         </div>
-                        <div style="position:relative;top:-20px;left:80%;">
-                            时间
-                        </div>
-
-
-
-
-
-
-
-                        <button style="position: relative;left:50%" >加入</button>
+                        {%endfor%}
+                                
+                        <h6>出发地：<p>{{group.Travel_plan.Start_place}}</p></h6>
+                        <h>目的地：<p>{{group.Travel_plan.Destination}}</p></h6>
+                        <h6>出发日期：<p>{{group.Travel_plan.Start_date}}</p></h6>
+                        <h6>回程日期：<p>{{group.Travel_plan.End_date}}</p></h6>
+                        <h6>要求：<p>{{group.Travel_plan.Demand}}</p></h6>
+                        <form style = "position: relative; left:80%;"action="" method="post">
+                            <input value="{{group.id}}" type="hidden" name="add_member">
+                            <input value="创建群组" type="submit"/>
+                        </form>
+                    
                     </div>
                     {% endfor %}
                 </div>

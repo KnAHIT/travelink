@@ -3,36 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="/src/js/jquery.min.js"></script>
-    <script src="/src/js/jquery.tagsinput.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/src/CSS/tagsinput.css" type="text/css">
     <title></title>
-    <script type="text/javascript">
-        $(function () {
-            $("#txtTags").TagsInput({
-                usedTags: "天津|南京",
-                hotTags: "北京|上海|哈尔滨|嘉兴",
-                tagNum: 10,
-                maxWords: 10
-            });
-        });
-    </script>
     <style type="text/css">
-
-
+        body{
+            width: 100%;
+        }
 
         input{
             border-radius: 5px;
         }
-        nav{
-            position: relative;
-            top:20px;
 
-        }
         #nav > ul {
             margin: 0;
-            position: relative;
-            left:30%;
+
         }
 
         #nav > ul > li {
@@ -81,13 +64,13 @@
 
         }
         h1, h2, h3, h4, h5, h6,a,li {
-            color: #ffff99;
+
             font-weight: 700;
             font-family: monospace, monospace;
         }
 
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-            color: yellow;
+
             text-decoration: none;
             font-family: monospace, monospace;
         }
@@ -102,40 +85,65 @@
         }
         div#header {background-color:red;clear:both;text-align:center;}
         div#footer {background-color:red;clear:both;text-align:center;}
-
-        div#sidemenu {background-color: transparent;width:20% ;float:left;}
-        div#sidemenu>div{
+        div#menu {clear:both;text-align:center;}
+        div#planview {
+            background-color: transparent;
+            width:28% ;
+            float:left;
+            text-align: center;
+            border-right: 3px solid whitesmoke;
+            height: 1080px;
+        }
+        div.title{
             width: 50px;
             height: 50px;
-            margin:80px;
-
-
+            margin-top: 150px  ;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
 
             border-radius: 50%;
             background-color: navajowhite;
             color: #b3d4fc;;
             padding: 1.2em 1.2em 1.2em 1.2em;
         }
+        .account{
+            float: left;
+            border-bottom:3px solid whitesmoke ;
+            width: 100%;
+            text-align: left;
+
+
+        }
+        .account>img,h4{
+            display: inline;
+            position: relative;
+
+            left: 80px;
+
+        }
+        .account>h4{
+            position: relative;
+            top:-50px;
+            left: 130px;
+        }
         div#content {
 
 
-            width:80%;
+            width:70%;
             float:left;
             position: relative;
 
 
         }
+        .z{
+            float: left;
+            color: red;
+            text-shadow:1px 1px 2px black;
 
-        div#content>div>form>textarea{
-            position: relative;
-            resize: none;
-            width: 99%;
-            height: 150px;
-            background: #f7f7f7;
-            overflow-y: visible;
-            border:  inset 5px;
-            border-radius: 7px;
         }
+
+
         #content>div>form>p>input{
             width: 18.2%;
             border: solid;
@@ -146,16 +154,16 @@
         }
 
         div#passage{
-            height: 120px;
-            width: 100%;
+
+            width: 87%;
             border:  whitesmoke solid 3px;
             position: relative;
             background: whitesmoke;
-            margin:  -5px 0 0 0
         -webkit-box-shadow: 1px 1px 10px #778899;
             box-shadow: 1px 1px 10px #778899;
-            margin: 30px 0 0 0;
-            border-radius: 5px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
         }
         div#passage>a{
             border-radius: 10px;
@@ -175,9 +183,19 @@
             text-decoration: none;
 
         }
-        .text {
+        .plan{
+            height: 300px;
+            width: 87%;
+            border:  whitesmoke solid 3px;
             position: relative;
-            top:30px;
+            background: white;
+            margin:  -5px 0 0 0
+        -webkit-box-shadow: 1px 1px 10px #778899;
+            box-shadow: 1px 1px 10px #778899;
+            margin: 30px 0 0 0;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
         }
         #nav>button{
             margin:0;
@@ -204,15 +222,30 @@
 
         #nav>HR{
             position: relative;
-            top:-60px;
-        }
-        .author{
-            color: black;
-            font-family: "宋体" , sans-serif;
-            font-style: inherit;
-            font-weight:70;
+
         }
     </style>
+    <script type="text/javascript">  
+//===========================点击展开关闭效果====================================  
+function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){  
+var sourceObj = typeof oSourceObj == "string" ? document.getElementById(oSourceObj) : oSourceObj;  
+var targetObj = typeof oTargetObj == "string" ? document.getElementById(oTargetObj) : oTargetObj;  
+var openTip = oOpenTip || "";  
+var shutTip = oShutTip || "";  
+if(targetObj.style.display!="none"){  
+   if(shutAble) return;  
+   targetObj.style.display="none";  
+   if(openTip  &&  shutTip){  
+    sourceObj.innerHTML = shutTip;   
+   }  
+} else {  
+   targetObj.style.display="block";  
+   if(openTip  &&  shutTip){  
+    sourceObj.innerHTML = openTip;   
+   }  
+}  
+}  
+</script>  
 </head>
 <body>
 
@@ -221,69 +254,66 @@
     <div id="header">
         <h1>Travelink</h1>
     </div id = "header">
-
-    <nav id="nav">
+    <div id ="menu">
+        <nav id="nav">
         <ul>
-            <li class="current"><a>Home</a></li>
-            <li><a href="personal_index.html">我的空间</a></li>
-            <li><a href="go_out.html">go travel</a></li>
+            <li><a href="../../">Home</a></li>
+            <li class="current"><a href="/my_info/">我的空间</a></li>
+            <li><a href="/go_out.html/">去旅行</a></li>
 
         </ul>
 
-        {%if user_is_login == False%}
-        <form action="/login/">
-            <button><p>登录</p></button>
-        </form>
-        {%else%}
-        <button><p><h3 class="author">{{user_now}}</h3>已经登录</p></button>
-        <form action="" method="get">
-            <input type="submit" name="logout" value="Logout"/>
-        </form>
-        {%endif%}
-        <HR color=whitesmoke SIZE="3">
-    </nav>
-    <div id="sidemenu">
 
-            <div>
-                <a>none</a>
-            </div>
-            <div>
-               <a>none</a>
-            </div>
-            <div>
-                <a>none</a>
-            </div>
+        <HR color=whitesmoke SIZE="3">
+    </nav></div>
+
+
+    <div id="planview">
+        <div class="account">
+            <img src="http://127.0.0.1:8000/media/{{account.Image}}" height="120px" width="90px">
+            <h4>欢迎 {{account.Username}}</h4>
+
+        </div>
+        <div class="title">
+            <h3 style="position: relative;top:-22px;">出行计划</h3>
+        </div>
+        <div class="plan">
+            {%if travel_plan%}
+                {%for plan in travel_plan%}
+                    <li><h5>目的地：{{plan.Destination}}</h5></li>
+                <li><h5>出发地：{{plan.Start_place}}</h5></li>
+                <li><h5>出发时间：{{plan.Start_date}}</h5></li>
+                <li><h5>结束时间：{{plan.End_date}}</h5></li>
+                <li><h5>人数：{{plan.People_amount}}</h5></li>
+                <li><h5>预算：{{plan.Budget}}</h5></li>
+                <li><h5>其他需求：{{plan.Demand}}</h5></li>
+                {%endfor%}
+                {%endif%}
+
+        </div>
+
     </div>
 
     <div id="content">
-        <div>
-            <form action="" method="get" color = "blue">
-                <a style="text-decoration: none;">写说说</a>
-                <a class="current" href="yj.html">写日记</a>
-                <textarea  class ="text" name="yj" cols="86" rows="40"></textarea>
-                <p> <input type="text" value="" name="yj_tag" id="txtTags" /></p>
-                <input type="submit" value="提交" />
-            </form>
-        </div>
-
-        {%for passage in  blog_list%}
-            <div id = "passage">
-                <div >
-                    {{passage.Passage}}
-                </div>
-                <a>
-                    {{passage.Tag}}
-                </a>
-                <div class="image">
-                    <img src="http://127.0.0.1:8000/media/{{passage.Username.Image}}" style="position:relative;top:-20px;left:80%;display:inline;border-radius: 50%;"height="60px" width="60px">
-                    <p style="display: inline;position: relative;top:-23px;left:80%;font-size: 13px">{{passage.Username.Username}}</p>
-                </div>
+        <h2 class="z">文章和说说</h2>
+        {%if diary_list%}
+        {%for diary in diary_list %}
+        <div id = "passage">   
+            <div >
+                <li></li>
+                <li>{{diary.Date_time}}</li>
+                <li>{{diary.Abstract}}</li>
+                <p><button onclick="openShutManager(this,'{{diary.Title}}',false,'点击关闭','点击展开')">点击展开</button></p>  
+<p id="{{diary.Title}}" style="display:none">  
+   {{diary.Passage}}
+</p> 
             </div>
+            <a>
+            </a>
+        </div>
         {%endfor%}
-
-
-
-</div>
+        {%endif%}
+    </div>
 
     <div id="footer">Copyright k&a</div>
 </body>
